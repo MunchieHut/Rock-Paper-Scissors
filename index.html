@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rock Paper Scissors</title>
+  <title>Munchie Hut: Rock Paper Scissors</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,7 +14,7 @@
     }
     h1 {
       font-size: 2em;
-      color: #333;
+      color: #FF3F42; /* Applied the requested color here */
     }
     .buttons {
       margin: 20px 0;
@@ -25,26 +25,30 @@
       margin: 5px;
       border: none;
       border-radius: 5px;
-      background-color: #4CAF50;
+      background-color: #FF3F42; /* Applied to buttons */
       color: white;
       cursor: pointer;
-      touch-action: manipulation; /* Improves mobile tap response */
+      touch-action: manipulation;
     }
     button:hover {
-      background-color: #45a049;
+      background-color: #e6393c; /* Slightly darker shade for hover */
     }
     #result {
       font-size: 1.5em;
       margin-top: 20px;
       color: #555;
     }
+    #score {
+      font-size: 1.2em;
+      margin-top: 10px;
+      color: #FF3F42;
+    }
     #reset {
-      background-color: #f44336;
+      background-color: #555;
     }
     #reset:hover {
-      background-color: #da190b;
+      background-color: #333;
     }
-    /* Mobile responsiveness */
     @media (max-width: 600px) {
       button {
         font-size: 1em;
@@ -56,25 +60,28 @@
       h1 {
         font-size: 1.5em;
       }
-      #result {
+      #result, #score {
         font-size: 1.2em;
       }
     }
   </style>
 </head>
 <body>
-  <h1>Rock, Paper, Scissors</h1>
+  <h1>Munchie Hut: Rock, Paper, Scissors</h1>
   <div class="buttons">
     <button onclick="play('rock')">Rock</button>
     <button onclick="play('paper')">Paper</button>
     <button onclick="play('scissors')">Scissors</button>
   </div>
   <div id="result"></div>
+  <div id="score">Score: 0</div>
   <button id="reset" onclick="resetGame()">Reset</button>
 
   <script>
     const choices = ["rock", "paper", "scissors"];
     let resultDiv = document.getElementById("result");
+    let scoreDiv = document.getElementById("score");
+    let score = 0;
 
     function play(playerChoice) {
       const computerChoice = choices[Math.floor(Math.random() * 3)];
@@ -87,18 +94,21 @@
         (playerChoice === "scissors" && computerChoice === "paper")
       ) {
         result = "You win!";
+        score += 1; /* Increase score on win */
       } else {
         result = "Computer wins!";
       }
       resultDiv.innerHTML = `You chose <strong>${playerChoice}</strong>, Computer chose <strong>${computerChoice}</strong>. ${result}`;
+      scoreDiv.innerHTML = `Score: ${score}`;
     }
 
     function resetGame() {
+      score = 0;
       resultDiv.innerHTML = "Make your move!";
+      scoreDiv.innerHTML = `Score: ${score}`;
     }
 
-    // Initialize the game
-    resetGame();
+    resetGame(); // Initialize the game
   </script>
 </body>
 </html>
