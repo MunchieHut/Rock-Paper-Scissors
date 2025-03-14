@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2em;
+      color: #333;
+    }
+    .buttons {
+      margin: 20px 0;
+    }
+    button {
+      font-size: 1.2em;
+      padding: 15px 30px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      touch-action: manipulation; /* Improves mobile tap response */
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #result {
+      font-size: 1.5em;
+      margin-top: 20px;
+      color: #555;
+    }
+    #reset {
+      background-color: #f44336;
+    }
+    #reset:hover {
+      background-color: #da190b;
+    }
+    /* Mobile responsiveness */
+    @media (max-width: 600px) {
+      button {
+        font-size: 1em;
+        padding: 12px 20px;
+        display: block;
+        width: 80%;
+        margin: 10px auto;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+      #result {
+        font-size: 1.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Rock, Paper, Scissors</h1>
+  <div class="buttons">
+    <button onclick="play('rock')">Rock</button>
+    <button onclick="play('paper')">Paper</button>
+    <button onclick="play('scissors')">Scissors</button>
+  </div>
+  <div id="result"></div>
+  <button id="reset" onclick="resetGame()">Reset</button>
+
+  <script>
+    const choices = ["rock", "paper", "scissors"];
+    let resultDiv = document.getElementById("result");
+
+    function play(playerChoice) {
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+      let result = "";
+      if (playerChoice === computerChoice) {
+        result = "It's a tie!";
+      } else if (
+        (playerChoice === "rock" && computerChoice === "scissors") ||
+        (playerChoice === "paper" && computerChoice === "rock") ||
+        (playerChoice === "scissors" && computerChoice === "paper")
+      ) {
+        result = "You win!";
+      } else {
+        result = "Computer wins!";
+      }
+      resultDiv.innerHTML = `You chose <strong>${playerChoice}</strong>, Computer chose <strong>${computerChoice}</strong>. ${result}`;
+    }
+
+    function resetGame() {
+      resultDiv.innerHTML = "Make your move!";
+    }
+
+    // Initialize the game
+    resetGame();
+  </script>
+</body>
+</html>
